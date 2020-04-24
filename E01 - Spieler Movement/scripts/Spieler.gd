@@ -12,14 +12,6 @@ var vel = Vector3() # Our KinematicBody’s velocity.
 
 export var DEACCEL = 16 # How quickly we are going to decelerate. The higher the value, the sooner we will come to a complete stop.
 export var MAX_SLOPE_ANGLE = 40 # The steepest angle our KinematicBody will consider as a ‘floor’.
-
-onready var camera = $Kopf/Camera # The Camera node.
-onready var head = $Kopf
-
-export var MOUSE_SENSITIVITY = 0.05 # How sensitive the mouse is.
-
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _physics_process(delta):
 	process_input(delta)
@@ -29,8 +21,6 @@ func process_input(delta):
 	# ----------------------------------
 	# Walking
 	dir = Vector3() # set dir to an empty Vector3, dir is our direction the player intends to move towards
-	var cam_xform = camera.get_global_transform() # get the camera’s global transform and store it 
-	# The reason we need the camera’s global transform is so we can use its directional vectors
 	var input_movement_vector = Vector2()
 
 	if Input.is_action_pressed("vorwärts"):
@@ -45,22 +35,14 @@ func process_input(delta):
 	input_movement_vector = input_movement_vector.normalized()
 
 	# Move in the direction the camera is facing
-	dir += -cam_xform.basis.z * input_movement_vector.y # Forwards/Backwards
-	dir += cam_xform.basis.x * input_movement_vector.x # Left/Right
+	dir.z += input_movement_vector.y # Forwards/Backwards
+	dir.x += -input_movement_vector.x # Left/Right
 	# ----------------------------------
 
 	# Jumping
 	if is_on_floor(): # Check if we're on the floor, if we are, we can jump
 		if Input.is_action_just_pressed("springen"):
 			vel.y = JUMP_SPEED # Set the y axis of our vel(ocity) to jump_speed
-	# ----------------------------------
-	
-	# Capturing/Freeing the cursor
-	if Input.is_action_just_pressed("ui_cancel"): # if we press esc
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE: # if the mouse mode is already set to visible
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # set the mouse mode to invisible/captured
-		else: # if the mouse mode is already invisible/captured
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) # set the mouse mode to visible
 	# ----------------------------------
 	
 	# Sprinting
@@ -97,12 +79,3 @@ func process_movement(delta):
 	vel.z = hvel.z
 	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE)) # move
 	# deg2rad = degrees converted to radians
-
-func _input(event):
-	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED: # if the mouse is moving AND the mouse mode is set to captured
-		head.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY)) #Rotate only the head/camera on the x
-		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1)) # Rotate everything on the y
-
-		var camera_rot = head.rotation_degrees
-		camera_rot.x = clamp(camera_rot.x, -70, 70) # clamp the x rotation
-		head.rotation_degrees = camera_rot
