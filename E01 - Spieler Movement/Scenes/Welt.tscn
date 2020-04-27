@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Boden.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Spieler.tscn" type="PackedScene" id=2]
+
+[node name="Welt" type="Spatial"]
+
+[node name="Spieler" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.62901, 0 )
+
+[node name="Boden" parent="." instance=ExtResource( 1 )]
