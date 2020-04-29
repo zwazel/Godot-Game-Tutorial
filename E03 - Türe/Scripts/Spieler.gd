@@ -9,6 +9,7 @@ export var SPRINT_ACCEL = 18
 var is_sprinting = false
 var dir = Vector3()
 var vel = Vector3()
+var hat_key = false
 
 export var DEACCEL = 16
 export var MAX_SLOPE_ANGLE = 40
@@ -17,6 +18,7 @@ export var MOUSE_SENSITIVITY = 0.05
 
 onready var camera = $Kopf/Camera
 onready var kopf = $Kopf
+onready var ray = $Kopf/RayCast
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -67,6 +69,12 @@ func process_input(delta):
 		else: # if the mouse mode is already invisible/captured
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) # set the mouse mode to visible
 	# ----------------------------------
+	
+	# open/close door
+	if Input.is_action_just_pressed("interact"):
+		var coll = ray.get_collider()
+		if ray.is_colliding() and coll.has_method("open_door"):
+			coll.open_door(hat_key)
 	
 func process_movement(delta):
 	dir.y = 0
