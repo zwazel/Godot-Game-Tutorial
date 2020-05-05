@@ -6,7 +6,7 @@ var state = false # true = offen, false = geschlossen
 
 func _ready():
 	rotatePoint = get_parent().get_parent()
-	anim_player = rotatePoint.get_child(0) # oder get_node("AnimationPlayer")
+	anim_player = rotatePoint.get_node("AnimationPlayer")
 
 func open_door(hat_key):
 	if hat_key:

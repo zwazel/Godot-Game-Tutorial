@@ -116,13 +116,14 @@ func _input(event):
 		kopf.rotation_degrees = camera_rot
  
 func kill():
-	self.global_transform.origin = respawn_point
-	
+	global_transform.origin = respawn_point
+
 func set_checkpoint(pos, object):
 	respawn_point = pos
 	if last_checkpoint:
 		last_checkpoint.is_current_checkpoint = false
 	last_checkpoint = object
 	object.is_current_checkpoint = true
+
 
 
