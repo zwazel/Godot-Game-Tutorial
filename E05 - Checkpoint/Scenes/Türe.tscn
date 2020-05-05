@@ -2,6 +2,11 @@
 
 [ext_resource path="res://Scripts/Türe.gd" type="Script" id=2]
 
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
 [sub_resource type="Animation" id=1]
 resource_name = "Öffnen"
 tracks/0/type = "value"
@@ -17,17 +22,9 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, -90, 0 ) ]
 }
 
-[sub_resource type="CubeMesh" id=2]
-
-[sub_resource type="ConcavePolygonShape" id=3]
-data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
-
 [node name="Türe" type="Spatial"]
 
 [node name="RotatePoint" type="Position3D" parent="."]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="RotatePoint"]
-"anims/Öffnen" = SubResource( 1 )
 
 [node name="MeshInstance" type="MeshInstance" parent="RotatePoint"]
 transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 0.5, 2.5, 2.5, 0 )
@@ -39,3 +36,6 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="RotatePoint/MeshInstance/StaticBody"]
 shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotatePoint"]
+"anims/Öffnen" = SubResource( 1 )
