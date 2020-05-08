@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Boden.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Spieler.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Mauer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Türe.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Schlüssel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Lava.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Tor.tscn" type="PackedScene" id=7]
+
+[node name="Welt" type="Spatial"]
+
+[node name="Spieler" parent="." instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+GRAVITY = -20.0
+MAX_SPEED = 12
+JUMP_SPEED = 8
+MAX_SPRINT_SPEED = 20
+
+[node name="Boden" type="Node" parent="."]
+
+[node name="Boden" parent="Boden" instance=ExtResource( 1 )]
+
+[node name="Boden4" parent="Boden" instance=ExtResource( 1 )]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, 0, -20 )
+
+[node name="Boden5" parent="Boden" instance=ExtResource( 1 )]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, 0, -54 )
+
+[node name="Boden6" parent="Boden" instance=ExtResource( 1 )]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 10, 0, 0, -88 )
+
+[node name="Boden2" parent="Boden" instance=ExtResource( 1 )]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 5, 0, 0, 15 )
+
+[node name="Boden3" parent="Boden" instance=ExtResource( 1 )]
+transform = Transform( 10, 0, 0, 0, 0.5, 0, 0, 0, 5, 0, 0, 39 )
+
+[node name="Mauer" type="Node" parent="."]
+
+[node name="Mauer" parent="Mauer" instance=ExtResource( 3 )]
+transform = Transform( 7.5, 0, 0, 0, 2.5, 0, 0, 0, 0.5, 2.5, 3, -10.5 )
+
+[node name="Mauer2" parent="Mauer" instance=ExtResource( 3 )]
+transform = Transform( 7.5, 0, 0, 0, 2.5, 0, 0, 0, 0.5, 2.5, 3, 10.5 )
+
+[node name="Mauer3" parent="Mauer" instance=ExtResource( 3 )]
+transform = Transform( -1.62921e-06, 0, -0.5, 0, 2.5, 0, 10, 0, -8.14603e-08, -10.5, 3, 0 )
+
+[node name="Mauer4" parent="Mauer" instance=ExtResource( 3 )]
+transform = Transform( -1.62921e-06, 0, -0.5, 0, 2.5, 0, 10, 0, -8.14603e-08, 10.5, 3, 0 )
+
+[node name="Türe" parent="." instance=ExtResource( 4 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, -5, 0.5, -10.5 )
+
+[node name="Schlüssel" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.37203, 1.72276, 42.3708 )
+
+[node name="Lava" type="Node" parent="."]
+
+[node name="Lava" parent="Lava" instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, -0.3, 27 )
+
+[node name="Lava2" parent="Lava" instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, -0.3, -37 )
+
+[node name="Lava3" parent="Lava" instance=ExtResource( 6 )]
+transform = Transform( -1.62921e-07, 0, -1, 0, 1, 0, 1, 0, -1.62921e-07, 0, -0.3, -71 )
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="Tor" parent="Checkpoints" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -55 )
+
+[node name="Tor2" parent="Checkpoints" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -90 )
