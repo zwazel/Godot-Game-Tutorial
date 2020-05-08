@@ -24,6 +24,8 @@ onready var ray = $Kopf/RayCast
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	yield(get_tree(), "idle_frame");
+	get_tree().call_group("gegner", "set_player", self);
 
 func _physics_process(delta):
 	process_input(delta)
